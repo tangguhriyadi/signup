@@ -1,1 +1,21 @@
-<p>register works!</p>
+<h3>{{ title }}</h3>
+
+<form [formGroup]="exform" (ngSubmit)="register()">
+    <label for="email">Email</label>
+    <input [(ngModel)]="user.email" formControlName="email"  type="text" name="email" placeholder="enter your email"> <br>
+    <small *ngIf="exform.get('email').invalid && exform.get('email').touched" style="color:red" >invalid !</small>
+    <br>
+    <br>
+    <label for="password">Password</label>
+    <input [(ngModel)]="user.password" formControlName="password" type="password" name="password" placeholder="password"><br>
+    <small *ngIf="exform.get('password').invalid && exform.get('password').touched" style="color:red" >invalid !</small>
+    <br>
+    <br>
+    <label for="password">Re-type Password</label>
+    <input formControlName="repassword" type="password" name="repassword" placeholder="Re-type password"><br>
+    <small *ngIf=" exform.get('repassword').value != exform.get('password').value" style="color:red" >pass does not match</small>
+    <br>
+    <br>    
+    <button [disabled]="exform.invalid" type="submit">Register</button>
+    <button routerLink="/login">Already have account?</button>
+</form>

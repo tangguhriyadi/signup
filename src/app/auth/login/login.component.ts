@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {  FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-login',
@@ -8,7 +10,10 @@ import {  FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
   exform:any
-  constructor(){}
+  constructor(
+    public api:ApiService,
+    public router:Router
+  ){}
   
   ngOnInit(): void {
     this.exform = new FormGroup({
@@ -23,6 +28,12 @@ export class LoginComponent implements OnInit {
   user:any = {}
   title:any = 'please login'
   login(){
-    console.log(this.user)
+    this.api.login(this.user.email, this.user.password).subscribe(res => {
+      /* localStorage.setItem('appToken', JSON.stringify(res)); */
+      console.log(res)
+      /* this.router.navigate(['admin/home']) */
+    }, err=>{
+      alert('tidak dapat login')
+    })
   }
 }

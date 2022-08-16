@@ -2,12 +2,12 @@
 
 <form [formGroup]="exform" (ngSubmit)="login()">
     <label for="email">Email</label>
-    <input formControlName="email"  type="text" name="email" placeholder="enter your email"> <br>
+    <input [(ngModel)]="user.email" formControlName="email"  type="text" name="email" placeholder="enter your email"> <br>
     <small *ngIf="exform.get('email').invalid && exform.get('email').touched" style="color:red" >invalid !</small>
     <br>
     <br>
     <label for="password">Password</label>
-    <input formControlName="password" type="password" name="password" placeholder="password"><br>
+    <input [(ngModel)]="user.password" formControlName="password" type="password" name="password" placeholder="password"><br>
     <small *ngIf="exform.get('password').invalid && exform.get('password').touched" style="color:red" >invalid !</small>
     <br>
     <br>
